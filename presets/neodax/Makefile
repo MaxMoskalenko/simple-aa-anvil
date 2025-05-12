@@ -31,16 +31,16 @@ deploy-erc20:
 deploy-weth-mock:
 	@make deploy-erc20 \
 		DEPLOYER_INDEX=77358 \
-		TOKEN_NAME="Wrapped Ethereum" \
+		TOKEN_NAME="Wrapped Ether" \
 		TOKEN_SYMBOL="WETH" \
 		TOKEN_DECIMALS=18
 
-deploy-usdt-mock:
+deploy-yellow-mock:
 	@make deploy-erc20 \
 		DEPLOYER_INDEX=77359 \
-		TOKEN_NAME="Tether USD" \
-		TOKEN_SYMBOL="USDT" \
-		TOKEN_DECIMALS=6
+		TOKEN_NAME="Yellow Token" \
+		TOKEN_SYMBOL="YELLOW" \
+		TOKEN_DECIMALS=8
 
 deploy-usdc-mock:
 	@make deploy-erc20 \
@@ -49,4 +49,4 @@ deploy-usdc-mock:
 		TOKEN_SYMBOL="USDC" \
 		TOKEN_DECIMALS=6
 
-deploy-all: deploy-weth-mock deploy-usdt-mock deploy-usdc-mock
+deploy-all: deploy-weth-mock deploy-yellow-mock deploy-usdc-mock
