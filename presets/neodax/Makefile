@@ -18,7 +18,7 @@ deploy-erc20:
 	@echo "  Name: $(TOKEN_NAME)"
 	@echo "  Symbol: $(TOKEN_SYMBOL)"
 	@echo "  Decimals: $(TOKEN_DECIMALS)"
-	@forge script $(SCRIPTS_PATH)/DeployAndFundERC20/DeployAndFundERC20.s.sol \
+	@forge script $(SCRIPTS_PATH)/DeployAndFundERC20.s.sol \
 		--broadcast \
 		--rpc-url $(RPC_URL) \
 		--sig "run(uint32,string,string,uint8,string)" \
@@ -26,6 +26,15 @@ deploy-erc20:
 		'"$(TOKEN_NAME)"' \
 		'"$(TOKEN_SYMBOL)"' \
 		$(TOKEN_DECIMALS) \
+		'"$(MNEMONIC)"'
+
+deploy-balance-checker:
+	@echo "Deploying BalanceChecker..."
+	@forge script $(SCRIPTS_PATH)/DeployBalanceChecker.s.sol \
+		--broadcast \
+		--rpc-url $(RPC_URL) \
+		--sig "run(uint32,string)" \
+		53231 \
 		'"$(MNEMONIC)"'
 
 deploy-weth-mock:
@@ -49,4 +58,4 @@ deploy-usdc-mock:
 		TOKEN_SYMBOL="USDC" \
 		TOKEN_DECIMALS=6
 
-deploy-all: deploy-weth-mock deploy-yellow-mock deploy-usdc-mock
+deploy-all: deploy-weth-mock deploy-yellow-mock deploy-usdc-mock deploy-balance-checker

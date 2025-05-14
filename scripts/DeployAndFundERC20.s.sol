@@ -4,18 +4,18 @@ pragma solidity ^0.8.13;
 import {Script, console} from "forge-std/Script.sol";
 import {TestERC20} from "contracts/TestERC20.sol";
 
-contract DeployFundERC20Script is Script {
+contract DeployAndFundERC20Script is Script {
     TestERC20 public token;
 
     function setUp() public {}
 
-    function run(uint32 deployerIndex, string memory name, string memory symbol, uint8 decimals,  string memory mnemonic) public {
+    function run(uint32 deployerIndex, string memory name, string memory symbol, uint8 decimals, string memory mnemonic) public {
         (address gasProvider, ) = deriveRememberKey(mnemonic, 0);
         vm.startBroadcast(gasProvider);
 
         (address deployer, ) = deriveRememberKey(mnemonic, deployerIndex);
 
-        payable(deployer).transfer(1 ether);
+        payable(deployer).transfer(0.1 ether);
 
         vm.stopBroadcast();
         vm.startBroadcast(deployer);
